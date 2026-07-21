@@ -120,7 +120,8 @@ def auto_update_idf(platform_name, module_name):
         sys.exit('ERROR: idf url is not defined')
 
     project_remote_url = subprocess.check_output(['git', 'remote', '-v']).decode(encoding="utf-8")
-    project_url = project_remote_url.split()[1]
+    remote_parts = project_remote_url.split()
+    project_url = remote_parts[1] if len(remote_parts) > 1 else ''
 
     if not os.path.exists('esp-idf'):
         # check repo
